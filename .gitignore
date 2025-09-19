@@ -1,0 +1,9 @@
+bin/
+dist/
+coverage.out
+*.swp
+.idea/
+.vscode/
+api/docs/*
+!api/docs/.keep
+.env

@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  api:
+    build: .
+    env_file: .env.example
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/awesome?sslmode=disable
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: awesome
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 5
+  migrate:
+    image: migrate/migrate:latest
+    entrypoint: [
+      "sh", "-c",
+      "while ! nc -z db 5432; do echo waiting for db; sleep 2; done; migrate -path /migrations -database postgres://postgres:postgres@db:5432/awesome?sslmode=disable up"
+    ]
+    volumes:
+      - ./internal/db/migrations:/migrations
+    depends_on:
+      - db
