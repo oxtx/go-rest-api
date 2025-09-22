@@ -48,7 +48,6 @@ clean-swag:
 clean-coverage:
 	rm -f coverage.out coverage.html
 
-# New CI-related commands
 fmt:
 	gofumpt -w .
 
@@ -68,13 +67,51 @@ tidy-check:
 		exit 1; \
 	fi
 
-# Run all CI checks locally
 ci-local: swag fmt-check tidy-check lint test-coverage
 	@echo "✅ All CI checks passed!"
 
-# Install development tools
 install-tools:
 	go install $(SWAG)
 	go install $(LINT)
 	go install mvdan.cc/gofumpt@latest
 	go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+
+help:
+	@echo "$(APP_NAME) - Available Commands:"
+	@echo ""
+	@echo "Development:"
+	@echo "  run                 - Run the application server"
+	@echo "  install-tools       - Install development tools"
+	@echo ""
+	@echo "Code Quality:"
+	@echo "  lint                - Run golangci-lint"
+	@echo "  lint-fix            - Run golangci-lint with auto-fix"
+	@echo "  fmt                 - Format code with gofumpt"
+	@echo "  fmt-check           - Check if code is formatted"
+	@echo ""
+	@echo "Testing:"
+	@echo "  test                - Run all tests"
+	@echo "  test-coverage       - Run tests with coverage report"
+	@echo ""
+	@echo "Dependencies:"
+	@echo "  tidy                - Tidy go modules"
+	@echo "  tidy-check          - Check if go.mod is tidy"
+	@echo ""
+	@echo "Documentation:"
+	@echo "  swag                - Generate Swagger documentation"
+	@echo ""
+	@echo "Database:"
+	@echo "  migrate-up-docker   - Run database migrations up"
+	@echo "  migrate-down-docker - Run database migrations down"
+	@echo ""
+	@echo "Docker:"
+	@echo "  docker-up           - Start Docker containers"
+	@echo "  docker-down         - Stop Docker containers"
+	@echo ""
+	@echo "Cleanup:"
+	@echo "  clean-swag          - Remove generated Swagger docs"
+	@echo "  clean-coverage      - Remove coverage files"
+	@echo ""
+	@echo "CI/CD:"
+	@echo "  ci-local            - Run all CI checks locally"
+	@echo ""

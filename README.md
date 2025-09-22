@@ -38,5 +38,12 @@ make run
 # Health check
 curl http://localhost:8080/healthz
 ```
+
+## Available Commands
+For more available commands or to check what's available, run:
+```bash
+make help
+```
+
 ## Workflow Status
 ![CI](https://github.com/oxtx/go-rest-api/workflows/CI/badge.svg)
