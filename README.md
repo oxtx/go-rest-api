@@ -26,7 +26,6 @@ model/                     # domain models
 server/                    # router + middleware
 db/migrations/             # SQL migrations
 pkg/response/              # response helpers
-scripts/gen_openapi.sh     # swagger generation
 ```
 ## Quick Start
 ```bash

@@ -6,7 +6,7 @@ LINT=github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
 export GO111MODULE=on
 
-.PHONY: run lint lint-fix tidy swag migrate-up-docker migrate-down-docker docker-up docker-down
+.PHONY: run lint lint-fix tidy swag migrate-up-docker migrate-down-docker docker-up docker-down clean
 
 run:
 	go run ./cmd/server
