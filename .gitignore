@@ -1,6 +1,7 @@
 bin/
 dist/
 coverage.out
+coverage.html
 *.swp
 .idea/
 .vscode/
