@@ -2,17 +2,20 @@ APP_NAME=go-rest-api
 BIN=bin/$(APP_NAME)
 PKG=./...
 SWAG=github.com/swaggo/swag/cmd/swag@v1.8.12
-# LINT=github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+LINT=github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
 export GO111MODULE=on
 
-.PHONY: run tidy swag migrate-up-docker migrate-down-docker docker-up docker-down
+.PHONY: run lint lint-fix tidy swag migrate-up-docker migrate-down-docker docker-up docker-down
 
 run:
 	go run ./cmd/server
 
-# lint:
-# 	go run $(LINT) run
+lint:
+	go run $(LINT) run
+
+lint-fix:
+	go run $(LINT) run --fix
 
 tidy:
 	go mod tidy

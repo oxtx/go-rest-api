@@ -9,5 +9,21 @@ linters:
     - gofumpt
     - revive
     - errcheck
+
+linters-settings:
+  revive:
+    rules:
+      # Disable package comment requirement
+      - name: package-comments
+        disabled: true
+      
+      # Disable exported function/type comment requirement
+      - name: exported
+        disabled: true
+      
+      # Allow blank imports with comments
+      - name: blank-imports
+        disabled: true
+
 issues:
   exclude-use-default: false
