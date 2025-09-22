@@ -12,7 +12,7 @@ Minimal, production-ready REST API scaffold in Go (Gin + PostgreSQL) with Swagge
 - Docker & docker compose
 
 ## Tech
-Go 1.25, Gin, pgx, swag, testify, slog, golangci-lint.
+Go 1.23, Gin, pgx, swag, testify, slog, golangci-lint.
 
 ## Structure (essentials)
 ```
@@ -33,10 +33,8 @@ scripts/gen_openapi.sh     # swagger generation
 git clone https://github.com/oxtx/go-rest-api
 cd go-rest-api
 cp .env.example .env
-docker compose up -d db
-export DATABASE_URL="postgres://postgres:postgres@localhost:5432/awesome?sslmode=disable"
-make migrate-up
 make swag    # generate api/docs
+make migrate-up-docker
 make run
 # Health check
 curl http://localhost:8080/healthz
