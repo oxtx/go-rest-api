@@ -6,7 +6,7 @@ LINT=github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
 export GO111MODULE=on
 
-.PHONY: run lint lint-fix tidy swag migrate-up-docker migrate-down-docker docker-up docker-down clean
+.PHONY: run lint lint-fix tidy swag migrate-up-docker migrate-down-docker docker-up docker-down clean-swag clean-coverage
 
 run:
 	go run ./cmd/server
@@ -16,6 +16,13 @@ lint:
 
 lint-fix:
 	go run $(LINT) run --fix
+	
+test:
+	go test -v ./...
+
+test-coverage:
+	go test -v -coverprofile=coverage.out ./...
+	go tool cover -html=coverage.out -o coverage.html
 
 tidy:
 	go mod tidy
@@ -35,5 +42,9 @@ docker-up:
 docker-down:
 	docker compose down
 
-clean:
+clean-swag:
 	rm -rf api/docs
+
+clean-coverage:
+	rm -f coverage.out coverage.html
+
